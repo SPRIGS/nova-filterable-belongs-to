@@ -1,7 +1,7 @@
 <template>
   <DefaultField :field="field" :errors="errors" :show-help-text="showHelpText" :full-width-content="fullWidthContent">
     <template #field>
-      <div class="block mb-2 " v-if="selectedResource?.display">{{ selectedResource.display }}</div>
+      <div class="block mb-2 " v-if="selectedResource?.display && selectedResource.display.length">{{ selectedResource.display }}</div>
       <div class="block help-text help-text mb-2" v-else>Nothing selected</div>
 
       <DefaultButton component="button" size="xs" type="button" dusk="confirm-action-button" class="ml-auto"
@@ -92,12 +92,12 @@
 </template>
 
 <script>
-import { FormField, HandlesValidationErrors } from 'laravel-nova'
+// import { FormField, HandlesValidationErrors } from 'laravel-nova'
 import ModalResourceTableRow from './ModalResourceTableRow.vue';
 
 export default {
   name: 'FilterableBelongsToFormField',
-  mixins: [FormField, HandlesValidationErrors],
+  // mixins: [FormField, HandlesValidationErrors],
   components: {ModalResourceTableRow},
   props: ['resourceName', 'resourceId', 'field'],
 
@@ -111,7 +111,7 @@ export default {
 
 
 
-    availableResources: [],
+
     initializingWithExistingResource: false,
     createdViaRelationModal: false,
     selectedResource: null,
@@ -124,18 +124,9 @@ export default {
 
   methods: {
     initializeComponent() {
-      // console.log(this.currentField);
-      
       this.withTrashed = false
-
-      // this.selectedResourceId = this.currentField.value
-      this.selectedResourceId = this.currentField.belongsToId
+      this.selectedResourceId = this.currentField?.belongsToId
       
-      
-
-
-      
-
       this.field.fill = this.fill
       this.selectedResource = {
         value: this.selectedResourceId,
@@ -153,9 +144,9 @@ export default {
       Nova.request().get(`/nova-api/${this.field.resourceName}?perPage=1000`)
         .then((data) => {
           this.resources = data.data.resources;
-          this.availableResources = data.data.resources;
-
-
+          this.resources.forEach(resource => {
+            resource.fields = resource.fields.filter(field => !this.field.hiddenFields.includes(field.attribute))
+          })
         });
 
 
@@ -191,6 +182,8 @@ export default {
     },
 
     updateSelectionStatus(resource) {
+      console.log('updateSelectionStatus');
+      
       let selectedResource = {
         value: resource.id.value,
         display: resource.title
