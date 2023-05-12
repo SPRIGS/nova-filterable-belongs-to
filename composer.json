@@ -11,13 +11,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Sprigs\\FilterableBelongsTo\\": "src/"
+            "SPRIGS\\FilterableBelongsTo\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Sprigs\\FilterableBelongsTo\\FieldServiceProvider"
+                "SPRIGS\\FilterableBelongsTo\\FieldServiceProvider"
             ]
         }
     },

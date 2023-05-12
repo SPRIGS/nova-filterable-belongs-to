@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprigs\FilterableBelongsTo;
+namespace SPRIGS\FilterableBelongsTo;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;

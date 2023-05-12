@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprigs\FilterableBelongsTo;
+namespace SPRIGS\FilterableBelongsTo;
 
 use Laravel\Nova\Fields\BelongsTo;
 
