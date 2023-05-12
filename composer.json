@@ -1,0 +1,29 @@
+{
+    "name": "sprigs/filterable-belongs-to",
+    "description": "A Laravel Nova field.",
+    "keywords": [
+        "laravel",
+        "nova"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3|^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sprigs\\FilterableBelongsTo\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sprigs\\FilterableBelongsTo\\FieldServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
